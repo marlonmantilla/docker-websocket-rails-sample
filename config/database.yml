@@ -1,0 +1,25 @@
+default: &default
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+  port: 5432
+
+development:
+  <<: *default
+  host: <%= ENV['DB_HOST'] %>
+  database: <%= ENV['DB_NAME'] %>
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %> 
+
+test:
+  <<: *default
+  database: optimista_test
+
+production:
+  <<: *default
+  encoding: unicode
+  pool: 10
+  database: <%= ENV['DB_NAME'] %>
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
